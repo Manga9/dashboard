@@ -1,0 +1,126 @@
+<div class="container">
+  <h2 class="text-center">All Users</h2>
+  <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addUserModal">Add New User</button>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Controls</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of allUsers; index as i">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{user.Name}}</td>
+        <td>{{user.Email}}</td>
+        <td>
+          <button class="btn btn-success" (click)=selectUser(user.ID) data-bs-toggle="modal" data-bs-target="#updateUserModal"><i class="fas fa-edit"></i></button>
+          <button class="btn btn-danger" (click)=delete(user.ID)><i class="fas fa-trash"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+</div>
+
+
+<!-- Start Add User Modal -->
+
+<div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addUserModalLabel">Add New User</h5>
+        <button type="button" class="btn-close" #closeButton data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #f="ngForm" (ngSubmit)="addNewUser(f)">
+          <div class="mb-3">
+            <label for="exampleInputName" class="form-label">Name</label>
+            <input type="text" class="form-control" id="exampleInputName" name="Name" #Name="ngModel" ngModel required>
+          </div>
+          <div class="alert alert-danger" *ngIf="Name.errors?.required && Name.touched">Name Is Required</div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" name="Email" #Email="ngModel" ngModel required email>
+          </div>
+          <div class="alert alert-danger" *ngIf="Email.errors?.required && Email.touched">Email Is Required</div>
+          <div class="alert alert-danger" *ngIf="Email.errors?.email && Email.touched">Your input format dosen't match with email format</div>
+
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="Password" #Password="ngModel" ngModel required minlength="6">
+          </div>
+          <div class="alert alert-danger" *ngIf="Password.errors?.required && Password.touched">Password Is Required</div>
+          <div class="alert alert-danger" *ngIf="Password.errors?.minlength && Password.touched">Password length must be equal 6 or +6</div>
+
+          <div class="input-group mb-3">
+            <label class="input-group-text" for="GroupId1">GroupId</label>
+            <select class="form-select" id="GroupId1" name="GroupId" #GroupId="ngModel" ngModel required>
+              <option selected value="false">0</option>
+              <option value="true">1</option>
+            </select>
+          </div>
+          <div class="alert alert-danger" *ngIf="GroupId.errors?.required && GroupId.touched">GroupId Is Required</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" type="submit" class="btn btn-primary" [disabled]="f.invalid">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- End Add User Modal -->
+
+<!-- Start Update User Modal -->
+
+<div class="modal fade" id="updateUserModal" tabindex="-1" aria-labelledby="updateUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateUserModalLabel">Update {{user.Name}} User</h5>
+        <button type="button" class="btn-close" #closeButtonUpdate data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #updateF="ngForm" (ngSubmit)="updateUser(updateF)">
+
+          <input type="hidden" name="userID" #userID="ngModel" [(ngModel)]="user.ID">
+          <div class="mb-3">
+            <label for="exampleInputName1" class="form-label">Name</label>
+            <input type="text" class="form-control" id="exampleInputName1" name="Name" #Name="ngModel" [(ngModel)]="user.Name" required>
+          </div>
+          <div class="alert alert-danger" *ngIf="Name.errors?.required && Name.touched">Name Is Required</div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail2" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail2" name="Email" #Email="ngModel" [(ngModel)]="user.Email" required email>
+          </div>
+          <div class="alert alert-danger" *ngIf="Email.errors?.required && Email.touched">Email Is Required</div>
+          <div class="alert alert-danger" *ngIf="Email.errors?.email && Email.touched">Your input format dosen't match with email format</div>
+
+          <div class="input-group mb-3">
+            <label class="input-group-text" for="GroupId2">GroupId</label>
+            <select class="form-select" id="GroupId2" name="GroupId" #GroupId="ngModel" [(ngModel)]="user.GroupId" required>
+              <option selected value="false">0</option>
+              <option value="true">1</option>
+            </select>
+          </div>
+          <div class="alert alert-danger" *ngIf="GroupId.errors?.required && GroupId.touched">GroupId Is Required</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" type="submit" class="btn btn-primary" [disabled]="updateF.invalid">Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- End Update User Model -->

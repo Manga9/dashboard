@@ -1,0 +1,89 @@
+<div class="container">
+  <h2 class="text-center">All Categories</h2>
+  <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addCategoryModal">Add New Category</button>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Controls</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of allCategories; index as i">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{category.Name}}</td>
+        <td>
+          <button class="btn btn-success" (click)=selectCategory(category.CatId) data-bs-toggle="modal" data-bs-target="#updateCategoryModal"><i class="fas fa-edit"></i></button>
+          <button class="btn btn-danger" (click)=delete(category.CatId)><i class="fas fa-trash"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-success" *ngIf="successMsg">{{successMsg}}</div>
+</div>
+
+
+<!-- Start Add Category Modal -->
+
+<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addCategoryModalLabel">Add New Category</h5>
+        <button type="button" class="btn-close" #closeButton data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #f="ngForm" (ngSubmit)="addNewCategory(f)">
+          <input type="hidden" name="CatId" #CatId="ngModel" ngModel>
+          <div class="mb-3">
+            <label for="exampleInputName" class="form-label">Name</label>
+            <input type="text" class="form-control" id="exampleInputName" name="Name" #Name="ngModel" ngModel required>
+          </div>
+          <div class="alert alert-danger" *ngIf="Name.errors?.required && Name.touched">Name Is Required</div>
+
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" type="submit" class="btn btn-primary" [disabled]="f.invalid">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- End Add Category Modal -->
+
+<!-- Start Update Category Modal -->
+
+<div class="modal fade" id="updateCategoryModal" tabindex="-1" aria-labelledby="updateCategoryModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateCategoryModalLabel">Update {{category.Name}} Category</h5>
+        <button type="button" class="btn-close" #closeButtonUpdate data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #updateF="ngForm" (ngSubmit)="updateCategory(updateF)">
+
+          <input type="hidden" name="CatId" #CatId="ngModel" [(ngModel)]="category.CatId">
+          <div class="mb-3">
+            <label for="exampleInputName1" class="form-label">Name</label>
+            <input type="text" class="form-control" id="exampleInputName1" name="Name" #Name="ngModel" [(ngModel)]="category.Name" required>
+          </div>
+          <div class="alert alert-danger" *ngIf="Name.errors?.required && Name.touched">Name Is Required</div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" type="submit" class="btn btn-primary" [disabled]="updateF.invalid">Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- End Update Category Model -->

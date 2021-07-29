@@ -1,0 +1,28 @@
+.box {
+  color: #fff;
+  font-size: 40px;
+  padding: 44px 25px;
+  margin-top: 30px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.count {
+  font-size: 50px;
+}
+
+.users {
+  background-color: #58B19F;
+}
+
+.cats {
+  background-color: #ff7979;
+}
+
+.products {
+  background-color: #f0932b;
+}
+
+a {
+  text-decoration: none;
+}

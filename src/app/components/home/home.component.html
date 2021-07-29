@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <a routerLink="/users">
+        <div class="box users">
+          <p><i class="fas fa-users"></i> Users</p>
+          <p class="count">{{allUsers.length}}</p>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-4">
+      <a routerLink="/categories">
+        <div class="box cats">
+          <p><i class="fas fa-tags"></i> Categories</p>
+          <p class="count">{{allCategories.length}}</p>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-4">
+      <a routerLink="/products">
+        <div class="box products">
+          <p><i class="fas fa-bars"></i> Products</p>
+          <p class="count">{{allProducts.length}}</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

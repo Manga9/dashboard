@@ -1,0 +1,66 @@
+.header {
+  background-color: #212f3d;
+  color: #fff;
+  padding: 15px 30px;
+}
+
+.header .top-header {
+  padding: 0;
+  margin: 0;
+  max-width: 1300px;
+}
+
+.header h3 {
+  color: #f08804;
+  margin: 0;
+}
+
+.header p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.header .search form input {
+  width: 90%;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.header .search form button {
+  margin-left: -1%;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  background-color: #f08804;
+  border: 1 solid;
+  border-color: #f08804;
+}
+
+.header .search form button svg {
+  color: #fff;
+}
+
+.header .nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header .user img {
+  max-width: 49px;
+  border-radius: 50%;
+}
+
+.header .user {
+  display: flex;
+}
+
+.header .user .dropdown {
+  vertical-align: middle;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.header .user .dropdown button {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+}
